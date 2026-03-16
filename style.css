@@ -1,68 +1,179 @@
-/* Custom styles for our Anime Theme */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #F0F8FF; /* Alice Blue - a very light sky blue */
-    color: #2c3e50; /* Dark Navy/Slate */
-}
-.font-anime {
-    font-family: 'Mochiy Pop One', sans-serif;
-}
-.text-sakura {
-    color: #FFB7C5; /* Cherry Blossom Pink */
-}
-.bg-navy {
-    background-color: #2c3e50;
-}
-/* Style for the falling petals canvas */
-#sakura-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none; /* Allows clicks to go through the canvas */
-}
-/* For hiding the scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+:root {
+    --soft-pink: #ff7597;
+    --soft-peach: #ffa375;
+    --deep-indigo: #0b1023;
+    --night-sky: rgba(10, 12, 30, 0.8);
+    --glass: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* Custom styles for our Anime Theme */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #F0F8FF; /* Alice Blue - a very light sky blue */
-    color: #2c3e50; /* Dark Navy/Slate */
+* {
+    box-sizing: border-box;
 }
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #ffe6f6 0%, #d9f0ff 40%, #0a0f23 100%);
+    color: #f1f5ff;
+    overflow-x: hidden;
+}
+
 .font-anime {
     font-family: 'Mochiy Pop One', sans-serif;
 }
+
 .text-sakura {
-    color: #FFB7C5; /* Cherry Blossom Pink */
+    color: #ffb7c5;
 }
+
 .bg-navy {
     background-color: #2c3e50;
 }
-/* Style for the falling petals canvas */
-#sakura-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+
+/* Hero + layout */
+header {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 10, 30, 0.78), rgba(8, 10, 30, 0.88)),
+        radial-gradient(circle at 20% 15%, rgba(255, 182, 200, 0.55), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(187, 236, 255, 0.45), transparent 55%);
+    mix-blend-mode: overlay;
+    z-index: 3;
+}
+
+header video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 5;
-    pointer-events: none; /* Allows clicks to go through the canvas */
+    object-fit: cover;
+    filter: blur(3px) brightness(0.64) saturate(1.15);
+    transform: scale(1.04);
 }
-/* For hiding the scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
+
+header > div {
+    position: relative;
+    z-index: 10;
+    max-width: 860px;
+    width: 100%;
+    text-align: center;
+    padding: 2.2rem 1.25rem;
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px);
 }
-.scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+h1 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(3rem, 5vw, 6.5rem);
+    letter-spacing: 0.02em;
+    margin: 0.35em 0 0.5em;
+    color: #ff586e;
+    text-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: glow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 10px 25px rgba(255, 88, 110, 0.55), 0 0 0 rgba(255, 255, 255, 0);
+    }
+    to {
+        text-shadow: 0 14px 40px rgba(255, 88, 110, 0.55), 0 0 30px rgba(255, 255, 255, 0.25);
+    }
+}
+
+#countdown {
+    font-size: clamp(1.4rem, 2vw, 2.5rem);
+    font-weight: 700;
+    margin-top: 1.5rem;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+#countdown + p {
+    margin-top: 0.85rem;
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.01em;
+}
+
+/* Content cards */
+section .text-left {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 22px 42px rgba(0, 0, 0, 0.18);
+    color: #1a1a1a;
+}
+
+section .text-left p {
+    margin: 1.25rem 0;
+    line-height: 1.65;
+    color: inherit;
+}
+
+section .text-left p:last-child {
+    margin-bottom: 0;
+}
+
+section h2 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    text-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+button {
+    background: linear-gradient(120deg, var(--soft-pink), var(--soft-peach));
+    color: rgba(20, 12, 35, 0.95);
+    border: none;
+    border-radius: 999px;
+    padding: 0.85rem 1.4rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Media tweaks */
+@media (max-width: 640px) {
+    header {
+        padding: 2.5rem 1rem;
+    }
+
+    .text-left {
+        padding: 1.75rem 1.5rem;
+    }
 }
 
